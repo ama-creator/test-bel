@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;500&family=Raleway:wght@400;500;600&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: calc(100vw / 1920 *10);
+    @media (max-width: 1024px) {
+        font-size: calc(100vw / 768 *10);
+    }
+    @media (max-width: 767px) {
+        font-size: calc(100vw / 500 *10);
+    }
+}
+
+body {
+    font-family: $primary-font;
+    font-style: normal;
+    font-weight: 400;
+    min-width: 320px;
+    overflow-x: hidden;
+    background: $light-grey-color;
+    margin-bottom: 1000px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.container {
+    width: 142rem;
+    max-width: 100%;
+    padding: 0 2rem;
+    margin:  0 auto;
+}
+
+.btn {
+    background: $green-color;
+    border-radius: 10rem;
+    transition: border-radius 1.5s ease-in-out;
+    color: $white-color;
+    &:hover {
+      border-bottom-right-radius: 50px;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+}
+
+// styles for hamburger element services
+@mixin line-props {
+    width: 100%;
+    height: $h-line-height;
+    background-color: $h-line-color; 
+    border-radius: $h-border-radius;
+    position: absolute;
+    transition-property: transform, opacity;
+    transition-timing-function: ease;
+    transition-duration: $h-transition-time;
+  }
+  .header-nav__category,
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0 0.9rem 0 0;
+    margin-right: 0.8rem;
+    background-color: $h-background-color;
+    &__container {
+      width: $h-width;
+      height: $h-height;
+      position: relative;
+    }
+    &:hover  &__inner {
+      transform: translate(-#{$h-hide-distance}, 50%);
+      opacity: $h-transition-opacity;
+    }
+    &:hover &__inner::before,
+    &:hover &__inner::after {
+      transform: translate(#{$h-hide-distance * 2}, 0);
+      opacity: $h-transition-opacity;
+    }
+    &.is-active &__inner {
+      display: none;
+    }
+    &__inner {
+      @include line-props();
+      top: 25%;
+      transform: translate($h-initial-opposition, -50%);
+      opacity: 1;
+      &::before,
+      &::after {
+        @include line-props();
+        content: "";
+        opacity: 1;
+        transform: translate(0);
+      }
+      &::before {
+        top: 0.7rem;
+        width: 100%;
+      }
+      &::after {
+        top: 1.4rem;
+        width: 100%;
+      }
+    }
+    &:hover  &__hidden {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
+    &:hover &__hidden::before,
+    &:hover &__hidden::after {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    &:hover &__hidden::after {
+        width: 70%;
+    }
+    &.is-active &__hidden {
+      opacity: 1;
+      transform: rotate(45deg);
+    }
+    &.is-active &__hidden::before {
+      transform: translate(0, #{$h-vertical-gap}) rotate(90deg);
+      transform-origin: center;
+    }
+    &.is-active &__hidden::after {
+      transform-origin: center;
+      transform: translate(0, -#{$h-vertical-gap}) rotate(0);
+    }
+    &__hidden {
+      opacity: 0;
+      @include line-props();
+      background-color: $h-hover-line-color;
+      top: 50%;
+      transform: translate(#{$h-hide-distance}, -50%);
+      &::before,
+      &::after {
+        @include line-props();
+        background-color: $h-hover-line-color;
+  
+        content: "";
+        transform: translate(#{$h-hide-distance * 2}, 0);
+      }
+      &::before {
+        top: -#{$h-vertical-gap};
+      }
+      &::after {
+        top: $h-vertical-gap;
+      }
+    }
+  }
+
+
+
+
+// animations 
+@keyframes icon-shake {
+    0% {
+        transform: translateY(-50%) rotateY(18deg) scale(1);
+    }
+    50% {
+        transform: translateY(-50%) rotateY(-18deg) scale(1.1);
+    }
+    100% {
+        transform: translateY(-50%) rotateY(18deg) scale(1.05);
+    }
+}
+
+
+// mobile-menu 
+.mobile-menu {
+  position: fixed;
+  top: -150rem;
+  &__item-link {
+    font-weight: 500;
+    font-size: 2rem;
+    color: $dark-grey-color;
+    padding: 1rem 0;
+    display: block;
+    transition: all .4s ease-in-out;
+    &:hover,
+    &--active {
+      color: $light-green-color;
+    }
+    &--active~.mobile-submenu {
+      display: block;
+    }
+  }
+}
+
+.mobile-submenu {
+  display: none;
+  padding-left: 1rem;
+  &__link {
+    display: block;
+    font-size: 1.6rem;
+    padding: .5rem;
+    transition: all .4s ease-in-out;
+    &:hover {
+      color: $light-green-color;
+    }
+  }
+}
+
+
+
+
+
+/* styles for button of menu   */
+.header-info {
+
+  .hamburger {
+    display: none;
+    cursor: pointer;
+  }
+
+  .hamburger {
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible;
+    position: relative;
+    z-index: 30;
+  }
+
+  .hamburger:hover {
+    opacity: 0.7;
+  }
+
+  .hamburger.is-active:hover {
+    opacity: 0.7;
+  }
+
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: $dark-grey-color;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .hamburger-box {
+    width: 2.4rem;
+    height: 2.4rem;
+    display: inline-block;
+    position: relative;
+  }
+
+  .hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -0.2rem;
+  }
+
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    width: 2.3rem;
+    height: 0.3rem;
+    background-color: $dark-grey-color;
+    border-radius: 0.4rem;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+  }
+
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    content: "";
+    display: block;
+  }
+
+  .hamburger-inner::before {
+    top: -1rem;
+  }
+
+  .hamburger-inner::after {
+    bottom: -1rem;
+  }
+
+  .hamburger--elastic .hamburger-inner {
+    top: 0.2rem;
+    transition-duration: 0.275s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .hamburger--elastic .hamburger-inner::before {
+    top: 1rem;
+    transition: opacity 0.125s 0.275s ease;
+  }
+
+  .hamburger--elastic .hamburger-inner::after {
+    top: 2rem;
+    transition: transform 0.275s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .hamburger--elastic.is-active .hamburger-inner {
+    transform: translate3d(0, 1rem, 0) rotate(135deg);
+    transition-delay: 0.075s;
+  }
+
+  .hamburger--elastic.is-active .hamburger-inner::before {
+    transition-delay: 0s;
+    opacity: 0;
+  }
+
+  .hamburger--elastic.is-active .hamburger-inner::after {
+    transform: translate3d(0, -2rem, 0) rotate(-270deg);
+    transition-delay: 0.075s;
+  }
+}
+
+//   animations 
+@keyframes showingWindowMenu {
+  0% {
+    transform: rotate(19deg) translateX(-0.6rem);
+    transform-origin: top;
+  }
+  100% {
+    transform: rotate(0) translateX(0);
+    transform-origin: top;
+  }
+}
+@keyframes menuShow {
+  0% {
+    transform: translate(-1000px, -100px) rotate(-70deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+@keyframes show-menu {
+  from {
+      transform: translateX(-150rem);
+  } 
+}
+
+
+@keyframes show-menu-item {
+  from {
+      transform: translateX(-100rem);
+      opacity: 0;
+  } 
+}

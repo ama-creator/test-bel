@@ -1,0 +1,29 @@
+// COLORS 
+$light-green-color: #6FC67B;
+$green-color: #5DB469;
+$grey-color: #80807C;
+$light-grey-color: #F5F5F5;
+$dark-grey-color: #434341;
+$white-color: #fff;
+$black-color: #232321;
+
+// FONTS 
+$primary-font: 'Raleway', sans-serif;
+$secondary-font: 'Jost', sans-serif;
+
+
+// mobile menu 
+$h-padding: 1.5rem;
+$h-width: 1.9rem;
+$h-height: 2.4rem;
+$h-background-color: transparent;
+$h-line-color: #372E11;
+$h-hover-line-color: $light-green-color;
+$h-line-height: 0.2rem;
+$h-border-radius: 0.4rem;
+$h-transition-time: 0.4s;
+$h-transition-function: ease;
+$h-transition-opacity: 0;
+$h-vertical-gap: 0.7rem;
+$h-initial-opposition: 0.1rem;
+$h-hide-distance: $h-width + $h-padding;
