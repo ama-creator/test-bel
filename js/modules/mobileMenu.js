@@ -10,7 +10,7 @@ const toggleMenu = () => {
 
     if (!hamburgerBtn.classList.contains("is-active")) {
       menulist.classList.remove("mobile-menu--active");
-      document.querySelector("html").style.overflowY = "scroll";
+      document.querySelector("html").style.overflowY = "inherit";
     }
   });
 };
